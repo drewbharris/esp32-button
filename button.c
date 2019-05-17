@@ -98,7 +98,7 @@ static void button_task(void *pvParameter)
     }
 }
 
-QueueHandle_t * button_init(unsigned long long pin_select) {
+QueueHandle_t * button_init(unsigned long long pin_select, uint8_t pull_up, uint8_t pull_down) {
     if (pin_count != -1) {
         ESP_LOGI(TAG, "Already initialized");
         return NULL;
@@ -108,6 +108,8 @@ QueueHandle_t * button_init(unsigned long long pin_select) {
     gpio_config_t io_conf;
     io_conf.mode = GPIO_MODE_INPUT;
     io_conf.pin_bit_mask = pin_select;
+    io_conf.pull_up_en = pull_up;
+    io_conf.pull_down_en = pull_down;
     gpio_config(&io_conf);
 
     // Scan the pin map to determine number of pins
