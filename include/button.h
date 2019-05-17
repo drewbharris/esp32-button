@@ -8,4 +8,4 @@ typedef struct {
     uint8_t event;
 } button_event_t;
 
-QueueHandle_t * button_init(unsigned long long pin_select);
+QueueHandle_t * button_init(unsigned long long pin_select, uint8_t pull_up, uint8_t pull_down);
